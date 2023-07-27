@@ -20,6 +20,7 @@ class TodoSerializer(serializers.Serializer):
         return instance
 '''
 
+
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
