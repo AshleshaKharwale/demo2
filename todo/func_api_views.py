@@ -1,14 +1,16 @@
 from django.http import Http404
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Todo
 from .serializers import TodoSerializer
 
 
 @api_view(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def todo_api_view(request, pk=None):
 
     if request.method == 'GET':
