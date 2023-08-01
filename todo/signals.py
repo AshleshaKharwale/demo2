@@ -42,3 +42,4 @@ def login_fail_signal(sender, request, credentials, *args, **kwargs):
     print("credentials:", credentials)
     print("User could not log-in!!!")
     print("-------------------" * 7)
+

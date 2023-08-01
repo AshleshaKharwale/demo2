@@ -7,6 +7,8 @@ from rest_framework.mixins import (
 )
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from .models import Blog, Author
 from .serializers import BlogSerializer, AuthorSerializer
@@ -97,6 +99,8 @@ class BlogModelViewSet(ModelViewSet):
     serializer_class = BlogSerializer
     queryset = Blog.objects.all()
     pagination_class = BlogLimitOffsetPagination
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
 
 class AuthorReadOnlyModelViewSet(ReadOnlyModelViewSet):
