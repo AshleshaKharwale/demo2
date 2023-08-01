@@ -17,11 +17,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt import views as jwt_views
+from drf_spectacular.views import (
+    SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # JWT token generation urls
     path('api/token/', jwt_views.TokenObtainPairView.as_view()),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view()),
+
+    # Swagger urls
+    path('api/schema/', SpectacularAPIView.as_view(), name="schema"),  # It downloads yaml file
+    # swagger optional url
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='swagger'), name='redoc'),
+
+    # App urls
     path('', include('home.urls')),
     path('', include('notes.urls')),
     path('', include('todo.urls')),

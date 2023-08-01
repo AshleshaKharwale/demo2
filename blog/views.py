@@ -100,6 +100,7 @@ class BlogModelViewSet(ModelViewSet):
     queryset = Blog.objects.all()
     pagination_class = BlogLimitOffsetPagination
     permission_classes = [IsAuthenticated]
+    # JWT Authentication
     authentication_classes = [JWTAuthentication]
 
 

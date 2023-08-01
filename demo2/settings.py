@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'home',
     'blog',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +133,5 @@ LOGIN_REDIRECT_URL = '/notes/'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
