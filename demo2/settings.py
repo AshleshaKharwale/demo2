@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'todo.apps.TodoConfig',
     'notes',
     'rest_framework',
+    'rest_framework.authtoken',
     'home',
     'blog',
     'drf_spectacular',

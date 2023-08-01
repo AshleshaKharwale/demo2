@@ -32,7 +32,7 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name="schema"),  # It downloads yaml file
     # swagger optional url
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='swagger'), name='redoc'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
     # App urls
     path('', include('home.urls')),

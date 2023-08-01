@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.authentication import TokenAuthentication
 
 from .models import Blog, Author
 from .serializers import BlogSerializer, AuthorSerializer
@@ -108,3 +109,6 @@ class AuthorReadOnlyModelViewSet(ReadOnlyModelViewSet):
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
     pagination_class = AuthorCursorPagination
+    permission_classes = [IsAuthenticated]
+    # drf authtoken
+    authentication_classes = [TokenAuthentication]

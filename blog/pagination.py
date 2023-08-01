@@ -9,6 +9,7 @@ class MyNumberPagination(PageNumberPagination):
 
 class AuthorCursorPagination(CursorPagination):
     page_size = 3
+    ordering = 'name'
 
 
 # have to provide limit and offset values as path params
