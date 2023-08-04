@@ -64,7 +64,6 @@ class DetailUpdateView(RetrieveUpdateAPIView):
 
 class DetailDeleteView(RetrieveDestroyAPIView):
     queryset = QUERYSET
-    serializer_class = TodoSerializer
     permission_classes = [IsAuthenticated]
 
 

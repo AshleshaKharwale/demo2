@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load cache %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragment Cache</title>
+</head>
+<body>
+<h1>Uncached data</h1>
+{% cache 30 test %}
+<h2>Cached data updated</h2>
+{% endcache %}
+</body>
+</html>

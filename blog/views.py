@@ -22,7 +22,7 @@ class BolgViewSet(ViewSet):
 
     def list(self, request):
         self.queryset = Blog.objects.all()
-        serializer = BlogSerializer(self.queryset, many=True)
+        serializer = BlogSerializer(self.queryset, many=True, context={'request':request})
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):

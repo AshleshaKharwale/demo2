@@ -1,4 +1,5 @@
 from django.contrib import admin
+from rest_framework.authtoken.admin import TokenAdmin
 
 # Register your models here.
 from .models import Blog, Author
@@ -12,3 +13,7 @@ class BlogAdmin(admin.ModelAdmin):
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'email']
+
+
+# Generating drf authtoken for all users
+TokenAdmin.raw_id_fields = ['user']

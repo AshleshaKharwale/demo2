@@ -43,17 +43,22 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'home',
     'blog',
+    'caching',
     'drf_spectacular',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.function_middleware',
+    'middlewares.ClassMiddleware',
 ]
 
 ROOT_URLCONF = 'demo2.urls'
@@ -136,3 +141,12 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 3,
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "my_cache_table",
+    }
+}
+
+# CACHE_MIDDLEWARE_SECONDS = 30
