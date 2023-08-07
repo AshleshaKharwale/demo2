@@ -140,6 +140,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_THROTTLE_RATES': {
+            'anon': '2/minute',
+            'user': '5/minute'
+        }
 }
 
 CACHES = {
@@ -150,3 +154,4 @@ CACHES = {
 }
 
 # CACHE_MIDDLEWARE_SECONDS = 30
+

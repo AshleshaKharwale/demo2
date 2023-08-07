@@ -37,14 +37,14 @@
     - entirely memory-based cache server
     - used by sites such as Facebook and Wikipedia to reduce database access and dramatically increase site performance.
 
-4. Redis 
-    - in-memory database
-    - you’ll need a Redis server running either locally or on a remote machine.
-    - ```python
-    CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
-    }
-}
+   4. Redis 
+       - in-memory database
+       - you’ll need a Redis server running either locally or on a remote machine.
+       - ```python
+         CACHES = {
+           "default": {
+           "BACKEND": "django.core.cache.backends.redis.RedisCache",
+           "LOCATION": "redis://127.0.0.1:6379",
+           }
+         }
    

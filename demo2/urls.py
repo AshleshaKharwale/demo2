@@ -24,6 +24,7 @@ from drf_spectacular.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # Swagger urls
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui', SpectacularSwaggerView.as_view(url_name='schema'),
          name='swagger-ui'),
@@ -32,6 +33,11 @@ urlpatterns = [
     # JWT token generation urls
     path('api/token/', jwt_views.TokenObtainPairView.as_view()),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view()),
+
+    # drf login, logout views
+    # api/auth/login/ - login url
+    # api/auth/logout/ - logout url
+    path('api/auth/', include('rest_framework.urls')),
 
     # App urls
     path('', include('home.urls')),

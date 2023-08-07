@@ -1,4 +1,4 @@
-from rest_framework.permissions import DjangoObjectPermissions
+from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import (
     ViewSet, ModelViewSet, GenericViewSet, ReadOnlyModelViewSet, ViewSetMixin
 )
@@ -9,7 +9,8 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 from .models import Blog, Author
 from .serializers import BlogSerializer, AuthorSerializer
@@ -72,7 +73,11 @@ class AuthorViewSet(ListModelMixin, RetrieveModelMixin, CreateModelMixin, Update
 class AuthorViewSet(GenericViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-    permission_classes = [DjangoObjectPermissions]
+    # Authenticated user gets all access, Anonymous user gets read only access
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    # Session authentication
+    authentication_classes = [SessionAuthentication]
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
     def list(self, request):
         serializer = self.get_serializer(self.get_queryset(), many=True)
@@ -105,10 +110,20 @@ class BlogModelViewSet(ModelViewSet):
     authentication_classes = [JWTAuthentication]
 
 
-class AuthorReadOnlyModelViewSet(ReadOnlyModelViewSet):
-    serializer_class = AuthorSerializer
-    queryset = Author.objects.all()
-    pagination_class = AuthorCursorPagination
-    permission_classes = [IsAuthenticated]
-    # drf authtoken
-    authentication_classes = [TokenAuthentication]
+# class AuthorReadOnlyModelViewSet(ReadOnlyModelViewSet):
+#     serializer_class = AuthorSerializer
+#     queryset = Author.objects.all()
+#     pagination_class = AuthorCursorPagination
+#     permission_classes = [IsAuthenticated]
+#     # drf authtoken
+#     authentication_classes = [TokenAuthentication]
+
+
+'''
+How Session Authentication is different from Basic Authentication?
+
+In the basic authentication we need to send the username and password for every request.
+In the session authentication we will send username and password at initial request. 
+Then from server response we get the session id which stores in browser and gonna use that for 
+requests.
+'''
